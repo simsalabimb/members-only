@@ -1,7 +1,28 @@
-<p id="notice"><%= notice %></p>
 
-<h1>Posts</h1>
 
+<h1>Members-Only</h1>
+
+<div class = "posts">
+    <% @posts.each do |post| %>
+ 
+   <p> 
+    Posts: <%= link_to post.body, post_path(post) %><br>
+
+    <% if user_signed_in? %>
+    USER: <%= post.user.email %><br>
+    <% end %>
+
+    </p>
+   <% end %>
+</div>
+
+
+<br>
+
+<%= link_to 'New Post', new_post_path %>
+
+
+<% if false %>
 <table>
   <thead>
     <tr>
@@ -11,7 +32,9 @@
 
   <tbody>
     <% @posts.each do |post| %>
+ 
       <tr>
+        <td><%= link_to post.title, post_path(post) %></td>
         <td><%= link_to 'Show', post %></td>
         <td><%= link_to 'Edit', edit_post_path(post) %></td>
         <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -20,6 +43,5 @@
   </tbody>
 </table>
 
-<br>
 
-<%= link_to 'New Post', new_post_path %>
+<% end %>
